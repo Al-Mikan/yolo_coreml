@@ -13,7 +13,7 @@ import Vision
 class ViewController: UIViewController {
 
     private var videoCapture: VideoCapture!
-    private let serialQueue = DispatchQueue(label: "com.shu223.coremlplayground.serialqueue")
+    private let serialQueue = DispatchQueue(label: "com.toyoshin")
     
     private let videoSize = CGSize(width: 1280, height: 720)
     private let preferredFps: Int32 = 2
@@ -24,7 +24,8 @@ class ViewController: UIViewController {
     @IBOutlet private weak var previewView: UIView!
     @IBOutlet private weak var modelLabel: UILabel!
     @IBOutlet private weak var bbView: BoundingBoxView!
-
+    @IBOutlet weak var loadingIcon: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -55,6 +56,7 @@ class ViewController: UIViewController {
             }
             DispatchQueue.main.async {
                 self.selectModel(url: self.modelUrls.first!)
+                self.loadingIcon.stopAnimating()
             }
         }
         
