@@ -21,16 +21,9 @@ class ViewController: UIViewController {
     private var modelUrls: [URL]!
     private var selectedVNModel: VNCoreMLModel?
     private var selectedModel: MLModel?
-
-    private var cropAndScaleOption: VNImageCropAndScaleOption = .scaleFit
-    
     @IBOutlet private weak var previewView: UIView!
     @IBOutlet private weak var modelLabel: UILabel!
-    @IBOutlet private weak var resultView: UIView!
-    @IBOutlet private weak var resultLabel: UILabel!
-    @IBOutlet private weak var othersLabel: UILabel!
     @IBOutlet private weak var bbView: BoundingBoxView!
-    @IBOutlet weak var cropAndScaleOptionSelector: UISegmentedControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,19 +46,18 @@ class ViewController: UIViewController {
         }
         
         let modelPaths = Bundle.main.paths(forResourcesOfType: "mlmodel", inDirectory: "models")
-        
-        modelUrls = []
-        for modelPath in modelPaths {
-            let url = URL(fileURLWithPath: modelPath)
-            let compiledUrl = try! MLModel.compileModel(at: url)
-            modelUrls.append(compiledUrl)
+        DispatchQueue.global(qos: .background).async {
+            self.modelUrls = []
+            for modelPath in modelPaths {
+                let url = URL(fileURLWithPath: modelPath)
+                let compiledUrl = try! MLModel.compileModel(at: url)
+                self.modelUrls.append(compiledUrl)
+            }
+            DispatchQueue.main.async {
+                self.selectModel(url: self.modelUrls.first!)
+            }
         }
         
-        selectModel(url: modelUrls.first!)
-        
-        // scaleFill
-        cropAndScaleOptionSelector.selectedSegmentIndex = 2
-        updateCropAndScaleOption()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -122,18 +114,16 @@ class ViewController: UIViewController {
     private func runModel(imageBuffer: CVPixelBuffer) {
         guard let model = selectedVNModel else { return }
         let handler = VNImageRequestHandler(cvPixelBuffer: imageBuffer)
-        
+        //リクエストの作成
         let request = VNCoreMLRequest(model: model, completionHandler: { (request, error) in
-            if let results = request.results as? [VNClassificationObservation] {
-                self.processClassificationObservations(results)
-            } else if #available(iOS 12.0, *), let results = request.results as? [VNRecognizedObjectObservation] {
+            //推論結果
+            if #available(iOS 12.0, *), let results = request.results as? [VNRecognizedObjectObservation] {
                 self.processObjectDetectionObservations(results)
             }
         })
         
         request.preferBackgroundProcessing = true
-        request.imageCropAndScaleOption = cropAndScaleOption
-        
+        request.imageCropAndScaleOption = .scaleFill
         do {
             try handler.perform([request])
         } catch {
@@ -146,47 +136,17 @@ class ViewController: UIViewController {
         bbView.observations = results
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.resultView.isHidden = true
             self.bbView.isHidden = false
             self.bbView.setNeedsDisplay()
         }
     }
 
-    private func processClassificationObservations(_ results: [VNClassificationObservation]) {
-        var firstResult = ""
-        var others = ""
-        for i in 0...10 {
-            guard i < results.count else { break }
-            let result = results[i]
-            let confidence = String(format: "%.2f", result.confidence * 100)
-            if i==0 {
-                firstResult = "\(result.identifier) \(confidence)"
-            } else {
-                others += "\(result.identifier) \(confidence)\n"
-            }
-        }
-        DispatchQueue.main.async(execute: {
-            self.bbView.isHidden = true
-            self.resultView.isHidden = false
-            self.resultLabel.text = firstResult
-            self.othersLabel.text = others
-        })
-    }
-
-    private func updateCropAndScaleOption() {
-        let selectedIndex = cropAndScaleOptionSelector.selectedSegmentIndex
-        cropAndScaleOption = VNImageCropAndScaleOption(rawValue: UInt(selectedIndex))!
-    }
-    
     // MARK: - Actions
     
     @IBAction func modelBtnTapped(_ sender: UIButton) {
         showActionSheet()
     }
     
-    @IBAction func cropAndScaleOptionChanged(_ sender: UISegmentedControl) {
-        updateCropAndScaleOption()
-    }
 }
 
 extension ViewController: UIPopoverPresentationControllerDelegate {
