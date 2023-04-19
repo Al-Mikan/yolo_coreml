@@ -72,6 +72,7 @@
 		8A413B8F20D2205F00A761EC /* MLModelCamera */ = {
 			isa = PBXGroup;
 			children = (
+				F06CCD6329EF865500B59A1D /* PhotoML */,
 				8A413B9C20D2206100A761EC /* Info.plist */,
 				8A413B9720D2206100A761EC /* Assets.xcassets */,
 				8A413B9920D2206100A761EC /* LaunchScreen.storyboard */,
@@ -79,9 +80,7 @@
 				F06CCD5E29EEF92A00B59A1D /* TableViewController.swift */,
 				F06CCD6029EEFA0600B59A1D /* TableViewCell.swift */,
 				8A413B9020D2205F00A761EC /* AppDelegate.swift */,
-				8A413B9220D2205F00A761EC /* CamMLViewController.swift */,
-				8A243AE920D99188005947D6 /* ModelDescriptionViewController.swift */,
-				8AEC912B24273FD70014E67B /* BoundingBoxView.swift */,
+				F06CCD6229EF862F00B59A1D /* CamML */,
 			);
 			path = MLModelCamera;
 			sourceTree = "<group>";
@@ -94,6 +93,23 @@
 				8A413BA520D221D500A761EC /* AVCaptureDevice+Extension.swift */,
 			);
 			path = VideoCapture;
+			sourceTree = "<group>";
+		};
+		F06CCD6229EF862F00B59A1D /* CamML */ = {
+			isa = PBXGroup;
+			children = (
+				8A413B9220D2205F00A761EC /* CamMLViewController.swift */,
+				8A243AE920D99188005947D6 /* ModelDescriptionViewController.swift */,
+				8AEC912B24273FD70014E67B /* BoundingBoxView.swift */,
+			);
+			path = CamML;
+			sourceTree = "<group>";
+		};
+		F06CCD6329EF865500B59A1D /* PhotoML */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PhotoML;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
