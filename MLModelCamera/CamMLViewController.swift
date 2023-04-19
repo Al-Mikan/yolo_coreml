@@ -10,7 +10,7 @@ import UIKit
 import CoreML
 import Vision
 
-class ViewController: UIViewController {
+class CamMLViewController: UIViewController {
 
     private var videoCapture: VideoCapture!
     private let serialQueue = DispatchQueue(label: "com.toyoshin")
@@ -151,7 +151,7 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController: UIPopoverPresentationControllerDelegate {
+extension CamMLViewController: UIPopoverPresentationControllerDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "popover" {
             let vc = segue.destination
