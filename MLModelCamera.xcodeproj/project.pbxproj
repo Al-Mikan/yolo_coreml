@@ -23,6 +23,7 @@
 		F06CCD6929EF87B700B59A1D /* Detection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06CCD6429EF87B700B59A1D /* Detection.swift */; };
 		F06CCD6B29EF87B700B59A1D /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06CCD6629EF87B700B59A1D /* ImageUtils.swift */; };
 		F06CCD6D29EF87B700B59A1D /* PhotoMLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06CCD6829EF87B700B59A1D /* PhotoMLViewController.swift */; };
+		F06CCD6F29EFB87900B59A1D /* LoadingIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06CCD6E29EFB87900B59A1D /* LoadingIcon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		F06CCD6429EF87B700B59A1D /* Detection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Detection.swift; sourceTree = "<group>"; };
 		F06CCD6629EF87B700B59A1D /* ImageUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUtils.swift; sourceTree = "<group>"; };
 		F06CCD6829EF87B700B59A1D /* PhotoMLViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoMLViewController.swift; sourceTree = "<group>"; };
+		F06CCD6E29EFB87900B59A1D /* LoadingIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIcon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 		8A413B8F20D2205F00A761EC /* MLModelCamera */ = {
 			isa = PBXGroup;
 			children = (
+				F06CCD6E29EFB87900B59A1D /* LoadingIcon.swift */,
 				F06CCD6329EF865500B59A1D /* PhotoML */,
 				8A413B9C20D2206100A761EC /* Info.plist */,
 				8A413B9720D2206100A761EC /* Assets.xcassets */,
@@ -199,6 +202,7 @@
 				F06CCD6929EF87B700B59A1D /* Detection.swift in Sources */,
 				8AEC912C24273FD70014E67B /* BoundingBoxView.swift in Sources */,
 				8A413B9320D2205F00A761EC /* CamMLViewController.swift in Sources */,
+				F06CCD6F29EFB87900B59A1D /* LoadingIcon.swift in Sources */,
 				F06CCD6129EEFA0600B59A1D /* TableViewCell.swift in Sources */,
 				F06CCD5F29EEF92A00B59A1D /* TableViewController.swift in Sources */,
 				8A413B9120D2205F00A761EC /* AppDelegate.swift in Sources */,

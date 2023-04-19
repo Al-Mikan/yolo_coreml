@@ -303,14 +303,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="v4Z-sF-Vub">
-                                <rect key="frame" x="176.66666666666666" y="406" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Dmw-tH-wER"/>
-                                    <constraint firstAttribute="width" constant="40" id="Ngq-Gs-flY"/>
-                                </constraints>
-                                <color key="color" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pcc-Tb-UfB">
                                 <rect key="frame" x="0.0" y="642" width="197" height="118"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -331,17 +323,14 @@
                             <constraint firstItem="k55-f1-qr6" firstAttribute="trailing" secondItem="qyg-RX-8iG" secondAttribute="trailing" id="a6u-Ur-8t6"/>
                             <constraint firstItem="mVS-bg-EkW" firstAttribute="centerY" secondItem="qyg-RX-8iG" secondAttribute="centerY" id="e5M-wP-Cgl"/>
                             <constraint firstItem="qyg-RX-8iG" firstAttribute="trailing" secondItem="2VK-2F-UQc" secondAttribute="trailing" constant="20" id="gVR-qz-MC0"/>
-                            <constraint firstItem="v4Z-sF-Vub" firstAttribute="centerX" secondItem="2Fq-kv-Ce8" secondAttribute="centerX" id="ghU-jh-v6K"/>
                             <constraint firstItem="2VK-2F-UQc" firstAttribute="leading" secondItem="2Fq-kv-Ce8" secondAttribute="leading" constant="20" id="hTT-1y-LFJ"/>
                             <constraint firstItem="mVS-bg-EkW" firstAttribute="leading" secondItem="qyg-RX-8iG" secondAttribute="leading" constant="20" id="u7L-La-2qD"/>
                             <constraint firstItem="k55-f1-qr6" firstAttribute="height" secondItem="2Fq-kv-Ce8" secondAttribute="height" multiplier="0.8" id="yGW-Oq-jt6"/>
-                            <constraint firstItem="v4Z-sF-Vub" firstAttribute="centerY" secondItem="2Fq-kv-Ce8" secondAttribute="centerY" id="z5q-bm-gAD"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="roe-nB-pBw"/>
                     <connections>
                         <outlet property="imageView" destination="k55-f1-qr6" id="k9x-2l-ZG6"/>
-                        <outlet property="loadingIcon" destination="v4Z-sF-Vub" id="xJf-ih-KK2"/>
                         <outlet property="messageLabel" destination="mVS-bg-EkW" id="N4Q-cV-Tnx"/>
                         <outlet property="modelLabel" destination="0ob-Po-5Bs" id="i0u-Ze-Yjd"/>
                     </connections>
