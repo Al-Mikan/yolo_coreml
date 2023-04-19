@@ -89,8 +89,8 @@ class CamMLViewController: UIViewController {
     // MARK: - Private
     
     private func showActionSheet() {
-        let alert = UIAlertController(title: "Models", message: "Choose a model", preferredStyle: .actionSheet)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let alert = UIAlertController(title: "CoreMLモデル一覧", message: "モデルを選択", preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
         alert.addAction(cancelAction)
         
         for modelUrl in modelUrls {

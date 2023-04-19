@@ -39,9 +39,9 @@ class TableViewController: UITableViewController {
         // Configure the cell...
         switch(indexPath.row){
         case 0:
-            cell.label.text = "カメラ"
+            cell.label.text = "リアルタイム物体検知"
         default:
-            cell.label.text = "未実装"
+            cell.label.text = "メディアから物体検知"
         }
 
         return cell
@@ -52,7 +52,10 @@ class TableViewController: UITableViewController {
         switch(indexPath.row){
         case 0:
             performSegue(withIdentifier: "theSegue", sender: nil)
+        case 1:
+            performSegue(withIdentifier: "photoSegue", sender: nil)
         default: break
+            
         }
         tableView.deselectRow(at: indexPath, animated: true)
         return
