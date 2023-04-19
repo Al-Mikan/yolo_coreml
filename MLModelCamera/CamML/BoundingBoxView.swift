@@ -11,6 +11,7 @@ import Vision
 import AVFoundation.AVUtilities
 
 class BoundingBoxView: UIView {
+    var blurMode = true;//ここでブラーを切り替え
     private let strokeWidth: CGFloat = 2
     
     private var imageRect: CGRect = CGRect.zero
@@ -33,13 +34,29 @@ class BoundingBoxView: UIView {
                 let firstLabelHash = recognizedObjectObservation.labels.first?.identifier.hashValue ?? 0.hashValue
                 color = UIColor(hue: (CGFloat(firstLabelHash % 256) / 512.0) + 1.0, saturation: 1, brightness: 1, alpha: 1)
             }
-
-            let rect = drawBoundingBox(context: context, observation: observation, color: color)
-            
-            if #available(iOS 12.0, *), let recognizedObjectObservation = observation as? VNRecognizedObjectObservation {
-                addLabel(on: rect, observation: recognizedObjectObservation, color: color)
+            if blurMode{
+                drawBlurView(observation: observation)
+            }else{
+                let rect = drawBoundingBox(context: context, observation: observation, color: color)
+                
+                if #available(iOS 12.0, *), let recognizedObjectObservation = observation as? VNRecognizedObjectObservation {
+                    addLabel(on: rect, observation: recognizedObjectObservation, color: color)
+                }
             }
         }
+    }
+    
+    private func drawBlurView(observation: VNDetectedObjectObservation) {
+        let convertedRect = VNImageRectForNormalizedRect(observation.boundingBox, Int(imageRect.width), Int(imageRect.height))
+        let x = convertedRect.minX + imageRect.minX
+        let y = (imageRect.height - convertedRect.maxY) + imageRect.minY
+        let rect = CGRect(origin: CGPoint(x: x, y: y), size: convertedRect.size)
+        
+        let blurEffect = UIBlurEffect(style: .regular) // .regular, .prominent, .extraLight, .light, .dark等が選べます
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = rect
+        
+        self.addSubview(blurView)
     }
     
     private func drawBoundingBox(context: CGContext, observation: VNDetectedObjectObservation, color: UIColor) -> CGRect {
@@ -47,12 +64,12 @@ class BoundingBoxView: UIView {
         let x = convertedRect.minX + imageRect.minX
         let y = (imageRect.height - convertedRect.maxY) + imageRect.minY
         let rect = CGRect(origin: CGPoint(x: x, y: y), size: convertedRect.size)
-        
+
         context.setStrokeColor(color.cgColor)
-        
+
         context.setLineWidth(strokeWidth)
         context.stroke(rect)
-        
+
         return rect
     }
 
