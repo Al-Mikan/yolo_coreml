@@ -11,7 +11,7 @@ import Vision
 import AVFoundation.AVUtilities
 
 class BoundingBoxView: UIView {
-    var blurMode = true;//ここでブラーを切り替え
+    var blurMode = false;//ここでブラーを切り替え
     private let strokeWidth: CGFloat = 2
     
     private var imageRect: CGRect = CGRect.zero
@@ -52,7 +52,7 @@ class BoundingBoxView: UIView {
         let y = (imageRect.height - convertedRect.maxY) + imageRect.minY
         let rect = CGRect(origin: CGPoint(x: x, y: y), size: convertedRect.size)
         
-        let blurEffect = UIBlurEffect(style: .regular) // .regular, .prominent, .extraLight, .light, .dark等が選べます
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark) // .regular, .prominent, .extraLight, .light, .dark等が選べます
         let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.frame = rect
         

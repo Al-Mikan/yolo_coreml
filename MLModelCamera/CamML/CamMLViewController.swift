@@ -35,6 +35,7 @@ class CamMLViewController: UIViewController {
         videoCapture = VideoCapture(cameraType: .back,
                                     preferredSpec: spec,
                                     previewContainer: previewView.layer)
+
         videoCapture.imageBufferHandler = {[unowned self] (imageBuffer, timestamp, outputBuffer) in
             let delay = CACurrentMediaTime() - timestamp.seconds
             if delay > frameInterval {
@@ -149,6 +150,16 @@ class CamMLViewController: UIViewController {
         showActionSheet()
     }
     
+    @IBAction func blurTapped(_ sender: UIBarButtonItem) {      bbView.blurMode.toggle()
+        if bbView.blurMode==true{
+            sender.image = UIImage(systemName: "person.2.slash.fill")
+        }else{
+            sender.image = UIImage(systemName: "person.2.fill")
+
+        }
+    }
+    
+    
 }
 
 extension CamMLViewController: UIPopoverPresentationControllerDelegate {
@@ -171,6 +182,8 @@ extension CamMLViewController: UIPopoverPresentationControllerDelegate {
 
 extension URL {
     var modelName: String {
-        return lastPathComponent.replacingOccurrences(of: ".mlmodelc", with: "")
+        let modelNameWithID = lastPathComponent.replacingOccurrences(of: ".mlmodelc", with: "")
+        let modelName=modelNameWithID.split(separator: "_")[0]
+        return String(modelName)
     }
 }
